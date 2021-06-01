@@ -7,7 +7,7 @@
 - name: Configre application
   template:
     src: env.weather.j2
-    dest: "/{{ application_project_name }}/env.weather.sample"
+    dest: "/{{ application_project_name }}/env.weather"
 
 - name: Configure grafana
   template:
