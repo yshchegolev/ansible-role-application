@@ -1,0 +1,21 @@
+---
+- name: Clone project repo
+  git:
+    repo: "{{ application_project_repo }}"
+    dest: /{{ application_project_name }}/
+
+- name: Configre application
+  template:
+    src: env.weather.sample.j2
+    dest: "/{{ application_project_name }}/env.weather.sample"
+
+- name: Configure grafana
+  template:
+    src: grafana.ini.j2
+    dest: "/{{ application_project_name }}/grafana/grafana.ini"
+
+- name: Start project
+  docker_compose:
+    project_name: "{{ application_project_name }}"
+    project_src: /{{ application_project_name }}/
+    state: present
